@@ -4,12 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:background="@color/backgroundPrimary">
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvBody"
+        android:layout_centerHorizontal="true"
+        android:background="@color/borderAccent"
+        android:layout_marginTop="10dp"/>
 
     <ImageView
         android:id="@+id/ivProfilePic"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -18,9 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivProfilePic"
-        tools:text="displayName" />
+        android:textStyle="bold"
+        tools:text="displayName"/>
 
     <TextView
         android:id="@+id/tvBody"
@@ -29,6 +41,19 @@
         android:layout_below="@+id/tvDisplayName"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
         android:layout_toEndOf="@+id/ivProfilePic"
-        tools:text="This is a tweet from my app. Wohoo!!" />
+        tools:text="This is a tweet from my app. Wohoo!!"/>
+
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:textAlignment="textEnd"
+        tools:text="20h"
+        android:textColor="@color/textSecondary"/>
 </RelativeLayout>
