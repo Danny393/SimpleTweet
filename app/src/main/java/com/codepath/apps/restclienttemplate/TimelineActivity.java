@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
     List<Tweet> tweets;
     TweetsAdapter adapter;
+    SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,17 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
 
         client = TwitterApp.getRestClient(this);
+        swipeContainer = findViewById(R.id.swipeContainer);
+        //set colors
+        swipeContainer.setColorSchemeResources(R.color.accentColor,R.color.backgroundPrimary,R.color.backgroundSecondary);
+        swipeContainer.setProgressBackgroundColorSchemeResource(R.color.backgroundSecondary);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG,"fetching new data");
+                populateHomeTimeline();
+            }
+        });
 
         //find the recycler view
         rvTweets = findViewById(R.id.rvTweets);
@@ -56,8 +69,10 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG,"Success" + json.toString());
                 JSONArray jsonArray =  json.jsonArray;
                 try {
-                    tweets.addAll(fromJsonArray(jsonArray));
-                    adapter.notifyDataSetChanged();
+                    adapter.clear();
+                    adapter.addAll(fromJsonArray(jsonArray));
+                    //signal that refresh is done
+                    swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
                     Log.e(TAG,"Json exception", e);
                 }

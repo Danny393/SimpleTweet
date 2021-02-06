@@ -6,7 +6,8 @@
     <string name="intent_scheme">oauth</string>
     <string name="intent_host">cprest</string>
 
-    <color name="backgroundPrimary">#243447</color>
+    <color name="accentColor">#1DA1F2</color>
+    <color name="backgroundPrimary">#1A2637</color>
     <color name="backgroundSecondary">#141d26</color>
     <color name="textPrimary">#FFFFFF</color>
     <color name="textSecondary">#B4B4B4</color>

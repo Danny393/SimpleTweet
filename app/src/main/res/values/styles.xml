@@ -6,9 +6,10 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
-        <item name="colorPrimary">@color/backgroundSecondary</item>
-        <item name="android:colorBackground">@color/backgroundSecondary</item>
+        <item name="colorPrimary">@color/backgroundPrimary</item>
+        <item name="android:colorBackground">@color/backgroundPrimary</item>
         <item name="android:textColor">@color/textPrimary</item>
+        <item name="titleTextColor">@color/accentColor</item>
     </style>
 
     <!-- Application theme. -->
