@@ -12,5 +12,6 @@
     <color name="textPrimary">#FFFFFF</color>
     <color name="textSecondary">#B4B4B4</color>
     <color name="borderAccent">#68676A</color>
+    <color name="textError">#F82D72</color>
 
 </resources>
