@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
     EndlessRecyclerViewScrollListener scrollListener;
+    int REQUEST_CODE = 27;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class TimelineActivity extends AppCompatActivity {
                 // 2. Deserialize and construct new model objects from the API response
                 JSONArray jsonArray = json.jsonArray;
                 try {
-                    List<Tweet> nextPage = fromJsonArray(jsonArray);
+                    List<Tweet> nextPage = Tweet.fromJsonArray(jsonArray);
                     // 3. Append the new data objects to the existing set of items inside the array of items
                     // 4. Notify the adapter of the new items made with `notifyItemRangeInserted()
                     adapter.addAll(nextPage);
@@ -111,7 +114,7 @@ public class TimelineActivity extends AppCompatActivity {
                 JSONArray jsonArray =  json.jsonArray;
                 try {
                     adapter.clear();
-                    adapter.addAll(fromJsonArray(jsonArray));
+                    adapter.addAll(Tweet.fromJsonArray(jsonArray));
                     //signal that refresh is done
                     swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
@@ -126,31 +129,6 @@ public class TimelineActivity extends AppCompatActivity {
         });
     }
 
-    public Tweet getTweetFromJson(JSONObject json) throws JSONException {
-        Tweet tweet = new Tweet();
-        tweet.body = json.getString("text");
-        tweet.createdAt = json.getString("created_at");
-        tweet.user = getUserFromJson(json.getJSONObject("user"));
-        tweet.id = json.getLong("id");
-        return tweet;
-    }
-
-    public User getUserFromJson(JSONObject json) throws JSONException {
-        User user = new User();
-        user.name = json.getString("name");
-        user.screenName = json.getString("screen_name");
-        user.imageURL = json.getString("profile_image_url_https");
-        return user;
-    }
-
-    public List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException {
-        List<Tweet> list = new ArrayList<>();
-        for(int i = 0; i < jsonArray.length(); i++) {
-            list.add(getTweetFromJson(jsonArray.getJSONObject(i)));
-        }
-        return list;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -163,9 +141,22 @@ public class TimelineActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Compose", Toast.LENGTH_SHORT).show();
             Intent compose = new Intent(this, ComposeActivity.class);
-            startActivity(compose);
+            startActivityForResult(compose, REQUEST_CODE);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
+            //get data from the intent
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            //update recycler view with the tweet
+            tweets.add(0, tweet);
+            adapter.notifyItemInserted(0);
+            rvTweets.smoothScrollToPosition(0);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
