@@ -10,10 +10,9 @@
         android:id="@+id/view1"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/tvBody"
+        android:layout_below="@id/btnHeart"
         android:layout_centerHorizontal="true"
-        android:background="@color/borderAccent"
-        android:layout_marginTop="10dp"/>
+        android:background="@color/borderAccent"/>
 
     <ImageView
         android:id="@+id/ivProfilePic"
@@ -43,7 +42,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="5dp"
         android:layout_toEndOf="@+id/ivProfilePic"
-        tools:text="This is a tweet from my app. Wohoo!!"/>
+        tools:text="This is a tweet from my app. Woohoo!!"/>
 
     <TextView
         android:id="@+id/tvTimestamp"
@@ -56,4 +55,46 @@
         android:textAlignment="textEnd"
         tools:text="20h"
         android:textColor="@color/textSecondary"/>
+
+    <Button
+        android:id="@+id/btnHeart"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/ic_heart_twitter" />
+
+    <TextView
+        android:id="@+id/tvHeartNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/btnHeart"
+        android:layout_below="@id/tvBody"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="2dp"
+        tools:text="123" />
+
+    <Button
+        android:id="@+id/btnRetweet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_toEndOf="@+id/btnHeart"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/ic_retweet_twitter" />
+
+    <TextView
+        android:id="@+id/tvRetweetNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBody"
+        android:layout_toEndOf="@id/btnRetweet"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="3dp"
+        tools:text="123"/>
+
 </RelativeLayout>

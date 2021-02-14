@@ -13,5 +13,6 @@
     <color name="textSecondary">#B4B4B4</color>
     <color name="borderAccent">#68676A</color>
     <color name="textError">#F82D72</color>
+    <color name="textSuccess">#41EF21</color>
 
 </resources>

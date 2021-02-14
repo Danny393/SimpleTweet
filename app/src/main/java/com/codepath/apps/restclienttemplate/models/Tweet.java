@@ -14,6 +14,11 @@ public class Tweet {
     public String createdAt;
     public User user;
     public long id;
+    public int favNum;
+    public boolean fav;
+    public int retweetNum;
+    public boolean retweet;
+
 
     //empty constructor for Parcel
     public  Tweet(){}
@@ -24,6 +29,10 @@ public class Tweet {
         tweet.createdAt = json.getString("created_at");
         tweet.user = User.getUserFromJson(json.getJSONObject("user"));
         tweet.id = json.getLong("id");
+        tweet.favNum = json.getInt("favorite_count");
+        tweet.fav = json.getBoolean("favorited");
+        tweet.retweetNum = json.getInt("retweet_count");
+        tweet.retweet = json.getBoolean("retweeted");
         return tweet;
     }
 
