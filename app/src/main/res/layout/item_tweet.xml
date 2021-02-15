@@ -33,16 +33,32 @@
         android:textStyle="bold"
         tools:text="displayName"/>
 
-    <TextView
-        android:id="@+id/tvBody"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llBody"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvDisplayName"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="5dp"
         android:layout_toEndOf="@+id/ivProfilePic"
-        tools:text="This is a tweet from my app. Woohoo!!"/>
+        android:orientation="vertical"
+        android:layout_marginEnd="10dp">
+        <TextView
+            android:id="@+id/tvBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
+            tools:text="This is a tweet from my app. Woohoo!!"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+    </LinearLayout>
+
+
 
     <TextView
         android:id="@+id/tvTimestamp"
@@ -51,7 +67,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="10dp"
         android:textAlignment="textEnd"
         tools:text="20h"
         android:textColor="@color/textSecondary"/>
@@ -60,7 +76,7 @@
         android:id="@+id/btnHeart"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/llBody"
         android:layout_marginStart="65dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
@@ -71,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/btnHeart"
-        android:layout_below="@id/tvBody"
+        android:layout_below="@id/llBody"
         android:layout_marginTop="8dp"
         android:layout_marginStart="2dp"
         tools:text="123" />
@@ -80,7 +96,7 @@
         android:id="@+id/btnRetweet"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/llBody"
         android:layout_toEndOf="@+id/btnHeart"
         android:layout_marginStart="80dp"
         android:layout_marginTop="5dp"
@@ -91,7 +107,7 @@
         android:id="@+id/tvRetweetNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvBody"
+        android:layout_below="@id/llBody"
         android:layout_toEndOf="@id/btnRetweet"
         android:layout_marginTop="8dp"
         android:layout_marginStart="3dp"
